@@ -14,7 +14,7 @@ class Solution {
       i--;
     }
 
-    return Math.min(cost[0], cost[1]);
+    return (cost[0] < cost[1]) ? cost[0]: cost[1];
   }
 }
 // @lc code=end
