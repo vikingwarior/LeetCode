@@ -6,37 +6,23 @@
 
 // @lc code=start
 class Solution {
-    public int[] findBall(int[][] a) {
-        int n=a.length;
-        int m=a[0].length;
-        int arr[]=new int[m];
-        Arrays.fill(arr,-1);
-        for(int i=0;i<m;i++){
-            int x,y;
-            x=0;y=i;
-            while(true){
-                if(x>=n){
-                    if(y>=0 && y<m){
-                        arr[i]=y;
-                    }else{
-                        
-                    }
-                    break;
-                }
-                else{
-                    if(y+1<m && a[x][y]==1 && a[x][y+1]==1){
-                        x++;
-                        y++;
-                    }else if(y-1>=0 && a[x][y]==-1 && a[x][y-1]==-1){
-                        x++;
-                        y--;
-                    }else{
-                        break;
-                    }
-                }
-            }
+    public int[] findBall(int[][] grid) {
+        int result[] = new int[grid[0].length];
+        for (int i = 0; i < grid[0].length; i++) {
+            result[i] = findBallDropColumn(0, i, grid);
         }
-        return arr;
+        return result;
+    }
+    public int findBallDropColumn(int row, int col, int[][] grid) {
+        if (row == grid.length)
+            return col;
+        int nextColumn = col + grid[row][col];
+        if (nextColumn < 0 ||
+                nextColumn > grid[0].length - 1 ||
+                grid[row][col] != grid[row][nextColumn]) {
+            return -1;
+        }
+        return findBallDropColumn(row + 1, nextColumn, grid);
     }
 }
 // @lc code=end
