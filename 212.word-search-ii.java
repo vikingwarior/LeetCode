@@ -21,9 +21,9 @@ class Solution {
         char c = board[i][j];
         if (c == '#' || p.next[c - 'a'] == null) return;
         p = p.next[c - 'a'];
-        if (p.word != null) {   // found one
+        if (p.word != null) {   
             res.add(p.word);
-            p.word = null;     // de-duplicate
+            p.word = null;    
         }
     
         board[i][j] = '#';
