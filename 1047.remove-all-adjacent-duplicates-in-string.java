@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /*
  * @lc app=leetcode id=1047 lang=java
  *
@@ -7,18 +9,19 @@
 // @lc code=start
 class Solution {
     public String removeDuplicates(String s) {
-        int i = 0;
-        while (true) {
-            if (i >= s.length()-1 || s == "") {
-                return s;
+        Stack<Character> finalStringStack = new Stack<>();
+        for (Character c : s.toCharArray()) {
+            if (finalStringStack.isEmpty() || c != finalStringStack.peek()) {
+                finalStringStack.push(c);
+                continue;
             }
-            if (s.charAt(i) == s.charAt(i+1)) {
-                s = s.substring(0, i) + s.substring(i+2, s.length());
-                if(i == 0)i = -1;
-                else i -= 2;
-            }
-            i++;
+            finalStringStack.pop();
         }
+        s = "";
+        while (!finalStringStack.isEmpty()) {
+            s += finalStringStack.pop();
+        }
+        return new StringBuilder(s).reverse().toString();
     }
 }
 // @lc code=end
