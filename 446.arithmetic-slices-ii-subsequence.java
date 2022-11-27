@@ -7,19 +7,24 @@
 // @lc code=start
 class Solution {
     public int numberOfArithmeticSlices(int[] nums) {
-        int n = nums.length;
-        int ans = 0;
-        HashMap<Long, Integer>[] dp = new HashMap[n];
-        for (int i = 0; i < n; ++i) dp[i] = new HashMap<>();
-        for (int i = 1; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                long diff = (long) nums[i] - (long) nums[j];
-                int cnt = dp[j].getOrDefault(diff, 0);
-                dp[i].put(diff, dp[i].getOrDefault(diff, 0) + cnt + 1);
-                ans += cnt;
-            }
+      int result = 0;
+      Map<Integer, Integer>[] dp = new HashMap[nums.length];
+      
+      //Initializing the elements of the Map Array
+      for(int i = 0; i < nums.length; i++)
+        dp[i] = new HashMap<>();
+      
+      for(int i = 1; i < nums.length; i++){
+        for(int j = 0; j < i; j++){
+          int difference = nums[i] - nums[j]; //Computing the difference
+          if((double)nums[i] - (double)nums[j] < Integer.MIN_VALUE || (double)nums[i] - (double)nums[j] > Integer.MAX_VALUE) continue;
+          
+          int count = dp[j].getOrDefault(difference, 0);//Get the occurances of differences previously, put 0 if none exists
+          result += count; // add the occurances to final result
+          dp[i].put(difference, dp[i].getOrDefault(difference, 0) + count + 1); // Add the total no of occurances for the given difference to the Map index corrosponding to given number
         }
-        return ans;
+      }
+      return result;
     }
 }
 // @lc code=end
