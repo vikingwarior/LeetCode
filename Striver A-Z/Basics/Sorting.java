@@ -126,7 +126,7 @@ public class Sorting {
       while (arr[left] <= pivotNo && left <= high-1) {
         left++;
       }
-      while (arr[right] > pivotNo && right > low+1) {
+      while (arr[right] > pivotNo && right >= low+1) {
         right--;
       }
 
@@ -134,15 +134,16 @@ public class Sorting {
         swapNum(arr, left, right);
       }
     }
-
+    
     swapNum(arr, low, right);
+    
     return right;
   }
 
   /* Main Function */
   public static void main(String[] args) {
     // int[] nums = { 24, 13};
-    int[] nums = { 13, 46, 24, 52, 20, 9 };
+    int[] nums = { 24, 18, 38, 43, 14, 40, 1, 54 };
     printArr(nums);
     quickSort(nums);
     printArr(nums);
@@ -157,9 +158,9 @@ public class Sorting {
   }
 
   private static void swapNum(int[] arr, int n1, int n2) {
-    arr[n1] += arr[n2];
-    arr[n2] = arr[n1] - arr[n2];
-    arr[n1] -= arr[n2];
+    int temp = arr[n1];
+    arr[n1] = arr[n2];
+    arr[n2]=temp;
   }
 
   private static int[] swapNum(int n1, int n2) {
