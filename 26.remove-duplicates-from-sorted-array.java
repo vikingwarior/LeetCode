@@ -9,14 +9,17 @@ import java.util.Arrays;
 // @lc code=start
 class Solution {
     public int removeDuplicates(int[] nums) {
-        int insertIndex = 1;
-        for(int i = 1; i < nums.length; i++){
-            if(nums[i - 1] != nums[i]) {
-                nums[insertIndex] = nums[i];     
-                insertIndex++;
+        int i = 0, j = 1;
+
+        while(j < nums.length){
+            if(nums[j] != nums[i]){
+                nums[i+1] = nums[j];
+                i++;
             }
+            j++;
         }
-        return insertIndex;
+
+        return i+1;
     }
 }
 // @lc code=end
